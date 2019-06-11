@@ -1,0 +1,155 @@
+<% include partials/header.ejs %>
+
+<!-- 
+    show form for add data in db
+-->
+        <div class="container text-white">
+            <div class="jumbotron bg-dark"  >
+
+        <form action="/" method="post">
+               <div class="form-group row">
+                <%# <label for="inputName" class="col-sm-1-12 col-form-label"></label> %>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control" name="name" id="inputName" placeholder="Enter Your Name " required>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="email" class="form-control"  name="email" id="inputName" placeholder="Enter Your Email" required>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="number" class="form-control" name="phone" id="inputName" placeholder="Enter Your Phone" maxlength="10" required>
+                </div>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true" ></i></button>
+                </div>
+            </div>
+        </form>
+
+
+<br>
+    <script>
+        function ValidateEmail(inputText)
+            {
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(inputText.value.match(mailformat))
+            {
+            document.form1.text1.focus();
+            return true;
+            }
+            else
+            {
+            alert("You have entered an invalid email address!");
+            document.form1.text1.focus();
+            return false;
+            }
+            }
+    </script>
+
+        <form method="get" action="/search">
+            <div class="form-group row  ">
+                <%# <label for="inputName" class="col-sm-1-12 col-form-label"></label> %>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="search" id="inputName" placeholder="Search using name , email , phone">
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit"  class="btn btn-primary col-md-4"><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            
+        </form>
+    
+
+    </div>
+</div>
+
+
+<!-- form for search data -->
+
+   
+
+
+<!--
+    show data for search and show in div
+-->
+<% if(flag){ %>
+
+<% var flag1 = false;var name="";var email="";phone=""; %>
+<% for(var i= 0; i<datas.length;i++ ){ %>
+    <%  if(datas[i].name == search || datas[i].email ==search || datas[i].phone == search){%>
+        <% flag1 = true; %>
+        <% name =datas[i].name; %>
+        <% email =datas[i].email; %>
+        <%phone = datas[i].phone; %>
+    <%}%>
+<% } %>
+
+
+<% } %>
+<%if(flag1){ %>
+    <div class="container text-center text-white">
+        <div class="jumbotron bg-dark">
+            <h1 class="text-capitalize">::Record Found:: </h1>
+            <div class="text-left border-danger " style="margin:0% ">
+                
+                <h4>Name  : &nbsp&nbsp <%=name%></h4>   
+                <h4>Phone :&nbsp&nbsp<%=phone%></h4>   
+                <h4>Email :&nbsp&nbsp<%=email%></h4>   
+            </div>
+        </div>    
+    </div>  
+<% } %>
+    
+
+
+ 
+<%# // !-- 
+//     table for show records in db in table form
+// --> %>
+
+    <div class=" container  text-white">
+        <div class="jumbotron bg-dark   ">
+            <div class="row">
+                    <h1 class="col-md-12 text-center">Record List</h1>
+            </div>
+            <table  class="table table-dark">
+                <div class="row">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th></th>
+
+                    </tr>
+
+                </div>
+                <div class="row">
+
+                      <% datas.forEach((data)=>{ %>
+                      <tr>
+                        <td><%= data.name %>  </td>
+                        <td><%= data.email %>  </td>
+                        <td><%= data.phone %>  </td>
+                            
+                        <td>
+                                <a name="" id="" class="btn btn-danger" href="/delete?id=<%= data._id %>" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                &nbsp
+                                <a name="" id="" class="btn btn-primary" href="/edit?id=<%= data._id %>" role="button">Edit</a>
+                        </td>
+                      </tr>
+                      <% })%>  
+                </div>
+            </table>    
+            
+        </div>
+        
+    </div>
+
+
+
+
+<% include partials/footer.ejs %>
+
+
+
+
+      
+   

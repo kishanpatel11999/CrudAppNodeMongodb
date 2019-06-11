@@ -1,0 +1,31 @@
+<% include partials/header.ejs %>
+
+<div class="container text-white">
+        <form action="/edit" method="post">
+            <div class="jumbotron bg-dark"  >
+               <div class="form-group row">
+                <%# <label for="inputName" class="col-sm-1-12 col-form-label"></label> %>
+ <input type="hidden" id="custId" name="id" value="<%= data._id %>">       
+
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control" name="name" id="inputName" placeholder="Enter Your Name" value="<%= data.name  %>">
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control" name="email" id="inputName" placeholder="Enter Your Email" value="<%= data.email %>">
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control" name="phone" id="inputName" placeholder="Enter Your Phone" value="<%= data.phone %>">
+                </div>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<% include partials/footer.ejs %>
